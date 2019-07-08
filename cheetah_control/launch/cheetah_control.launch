@@ -1,0 +1,28 @@
+<launch>
+
+  <!-- Load joint controller configurations from YAML file to parameter server -->
+  <rosparam file="$(find cheetah_control)/config/cheetah_control.yaml" command="load"/>
+
+  <!-- load the controllers -->
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+    output="screen" ns="/cheetah" args=" LF_joint1_position_controller
+										 LF_joint2_position_controller
+										 LF_joint3_position_controller
+										 LB_joint1_position_controller
+										 LB_joint2_position_controller
+										 LB_joint3_position_controller
+										 RF_joint1_position_controller
+										 RF_joint2_position_controller
+										 RF_joint3_position_controller
+										 RB_joint1_position_controller
+										 RB_joint2_position_controller
+										 RB_joint3_position_controller
+										 joint_state_controller"/>
+
+  <!-- convert joint states to TF transforms for rviz, etc -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
+    respawn="false" output="screen">
+    <remap from="/joint_states" to="/cheetah/joint_states" />
+  </node>
+
+</launch>

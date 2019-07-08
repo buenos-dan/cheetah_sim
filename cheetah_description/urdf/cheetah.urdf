@@ -1,0 +1,866 @@
+<robot
+  name="cheetah">
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <robotNamespace>/cheetah</robotNamespace>
+	  <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+    </plugin>
+  </gazebo>
+
+  <gazebo reference="BODY">
+    <gravity>true</gravity>
+    <sensor name="imu_sensor" type="imu">
+      <always_on>true</always_on>
+      <update_rate>100</update_rate>
+      <visualize>true</visualize>
+      <topic>__default_topic__</topic>
+      <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
+        <topicName>imu</topicName>
+        <bodyName>imu_link</bodyName>
+        <updateRateHZ>10.0</updateRateHZ>
+        <gaussianNoise>0.0</gaussianNoise>
+        <xyzOffset>0 0 0</xyzOffset>
+        <rpyOffset>0 0 0</rpyOffset>
+        <frameName>imu_link</frameName>
+      </plugin>
+      <pose>0 0 0 0 0 0</pose>
+    </sensor>
+  </gazebo>
+
+  <!-- add transmission -->
+  <transmission name="LF_tran1">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="LF_JOINT1">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="LF_motor1">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="LF_tran2">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="LF_JOINT2">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="LF_motor2">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="LF_tran3">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="LF_JOINT3">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="LF_motor3">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="RF_tran1">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="RF_JOINT1">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="RF_motor1">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="RF_tran2">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="RF_JOINT2">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="RF_motor2">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="RF_tran3">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="RF_JOINT3">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="RF_motor3">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="LB_tran1">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="LB_JOINT1">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="LB_motor1">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="LB_tran2">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="LB_JOINT2">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="LB_motor2">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="LB_tran3">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="LB_JOINT3">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="LB_motor3">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="RB_tran1">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="RB_JOINT1">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="RB_motor1">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="RB_tran2">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="RB_JOINT2">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="RB_motor2">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="RB_tran3">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="RB_JOINT3">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="RB_motor3">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+
+  <!-- Set link color -->
+  <gazebo reference="BODY"> 
+	<material>Gazebo/Orange</material>
+  </gazebo>
+
+  <!-- fix body with the world -->
+  <!-- link name="world"/ -->
+  <!-- joint name="fixed" type="fixed" -->
+    <!-- parent link="world"/ -->
+	<!-- child link="BODY"/ -->
+  <!-- /joint -->
+
+
+  <link
+    name="BODY">
+    <inertial>
+      <origin
+        xyz="0.113593903662276 -0.21706648647554 0.0725525782796028"
+        rpy="0 0 0" />
+      <mass
+        value="1.31844704893266" />
+      <inertia
+        ixx="0.0176138845473112"
+        ixy="1.32278411694406E-06"
+        ixz="-5.48867968021378E-08"
+        iyy="0.00541232504527596"
+        iyz="1.48504478644983E-07"
+        izz="0.0216123068810961" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cheetah_description/meshes/BODY.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cheetah_description/meshes/BODY.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="LF1">
+    <inertial>
+      <origin
+        xyz="-0.00356028712794883 -0.00217495542641513 0.0533371336391992"
+        rpy="0 0 0" />
+      <mass
+        value="0.12874452405232" />
+      <inertia
+        ixx="7.54178206100528E-05"
+        ixy="-3.17300014948878E-06"
+        ixz="2.10628877219479E-06"
+        iyy="7.9279259142516E-05"
+        iyz="1.48482617363543E-06"
+        izz="7.43038486907753E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cheetah_description/meshes/LF1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cheetah_description/meshes/LF1.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="LF_JOINT1"
+    type="continuous">
+    <origin
+      xyz="0.173599224631532 -0.399354557389219 0.0725529089199334"
+      rpy="1.5707963267949 0.511092050822873 -3.43375535468868E-17" />
+    <parent
+      link="BODY" />
+    <child
+      link="LF1" />
+    <axis
+      xyz="0 0 1" />
+	<dynamics
+	  friction="0.001" />
+  </joint>
+  <link
+    name="LF2">
+    <inertial>
+      <origin
+        xyz="-0.0474435815037099 -0.0113664649099384 0.0257671435187357"
+        rpy="0 0 0" />
+      <mass
+        value="0.323696832719431" />
+      <inertia
+        ixx="0.000279146456453759"
+        ixy="-0.000417139675857478"
+        ixz="0.000305968543038374"
+        iyy="0.0016275350403163"
+        iyz="9.65659599027155E-05"
+        izz="0.00159115336884766" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cheetah_description/meshes/LF2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cheetah_description/meshes/LF2.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="LF_JOINT2"
+    type="continuous">
+    <origin
+      xyz="0.0239889006854609 0.0138500051937306 0.0707119290859076"
+      rpy="1.5707963267949 -0.368671500214442 2.09439511787625" />
+    <parent
+      link="LF1" />
+    <child
+      link="LF2" />
+    <axis
+      xyz="0 0 0.99999999999998" />
+	<dynamics
+	  friction="0.001" />
+  </joint>
+  <link
+    name="LF3">
+    <inertial>
+      <origin
+        xyz="-0.127788265270613 -0.084239074728452 0.00126936250587434"
+        rpy="0 0 0" />
+      <mass
+        value="0.114240540212022" />
+      <inertia
+        ixx="0.0142610539008411"
+        ixy="-0.0216328338393764"
+        ixz="9.81796741797441E-04"
+        iyy="0.0328161817304789"
+        iyz="6.47218969946877E-04"
+        izz="0.0470766478340095" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cheetah_description/meshes/LF3.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cheetah_description/meshes/LF3.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="LF_JOINT3"
+    type="continuous">
+    <origin
+      xyz="-0.231822995878655 -0.0621135670258962 0.0433804774370614"
+      rpy="-2.01086507658697E-07 5.47983968079473E-15 -1.93946782700934" />
+    <parent
+      link="LF2" />
+    <child
+      link="LF3" />
+    <axis
+      xyz="0 0 1" />
+	<dynamics
+	  friction="0.001" />
+  </joint>
+  <link
+    name="RF1">
+    <inertial>
+      <origin
+        xyz="-0.00356028729085346 -0.00217495629764326 0.0533371334801993"
+        rpy="0 0 0" />
+      <mass
+        value="0.128744523661006" />
+      <inertia
+        ixx="7.54178194302585E-05"
+        ixy="-3.17300035849866E-06"
+        ixz="2.10628767188094E-06"
+        iyy="7.92792605435836E-05"
+        iyz="1.48482763237274E-06"
+        izz="7.43038659891306E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cheetah_description/meshes/RF1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cheetah_description/meshes/RF1.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="RF_JOINT1"
+    type="continuous">
+    <origin
+      xyz="0.053599224631532 -0.399354557389219 0.0725529089199333"
+      rpy="-1.5707963267949 -0.523598601027881 3.14159265358979" />
+    <parent
+      link="BODY" />
+    <child
+      link="RF1" />
+    <axis
+      xyz="0 0 1" />
+	<dynamics
+	  friction="0.001" />
+  </joint>
+  <link
+    name="RF2">
+    <inertial>
+      <origin
+        xyz="-0.0522840104115751 -0.0125260995514515 0.027860305734437"
+        rpy="0 0 0" />
+      <mass
+        value="0.293729852808938" />
+      <inertia
+        ixx="0.000260979254978939"
+        ixy="-0.000399330587666675"
+        ixz="0.000273825093346943"
+        iyy="0.00153930249317469"
+        iyz="8.88649351862152E-05"
+        izz="0.0015125542107132" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cheetah_description/meshes/RF2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cheetah_description/meshes/RF2.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="RF_JOINT2"
+    type="continuous">
+    <origin
+      xyz="0.0239889012320922 0.0138500042482511 0.070711929086322"
+      rpy="-1.57079632679487 -0.863675085440379 -1.04719753259462" />
+    <parent
+      link="RF1" />
+    <child
+      link="RF2" />
+    <axis
+      xyz="0 0 0.99999999999992" />
+	<dynamics
+	  friction="0.001" />
+  </joint>
+  <link
+    name="RF3">
+    <inertial>
+      <origin
+        xyz="0.133209831194905 -0.0753738304493778 0.00121607159211032"
+        rpy="0 0 0" />
+      <mass
+        value="0.114240539524017" />
+      <inertia
+        ixx="0.0114548942425245"
+        ixy="0.0202000406565315"
+        ixz="-6.59004020738382E-04"
+        iyy="0.0356220997961491"
+        iyz="3.73699652095502E-04"
+        izz="0.0470767500679258" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cheetah_description/meshes/RF3.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cheetah_description/meshes/RF3.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="RF_JOINT3"
+    type="continuous">
+    <origin
+      xyz="-0.231823008442479 -0.0621135692653797 0.0433804071002776"
+      rpy="1.58490470087489E-07 -4.8795080220757E-16 -0.707121241354518" />
+    <parent
+      link="RF2" />
+    <child
+      link="RF3" />
+    <axis
+      xyz="0 0 0.999999999999876" />
+	<dynamics
+	  friction="0.001" />
+  </joint>
+  <link
+    name="LB1">
+    <inertial>
+      <origin
+        xyz="-0.00356028601275479 -0.00217495602205527 0.0185587177088275"
+        rpy="0 0 0" />
+      <mass
+        value="0.128744523484197" />
+      <inertia
+        ixx="7.54178142885515E-05"
+        ixy="-3.1729967774514E-06"
+        ixz="2.10628654669623E-06"
+        iyy="7.92792604551504E-05"
+        iyz="1.48483080512161E-06"
+        izz="7.43038317528222E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cheetah_description/meshes/LB1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cheetah_description/meshes/LB1.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="LB_JOINT1"
+    type="continuous">
+    <origin
+      xyz="0.173599224631526 0 0.0725529089199335"
+      rpy="-1.57079632679489 -0.550782542641248 3.7606585259785E-17" />
+    <parent
+      link="BODY" />
+    <child
+      link="LB1" />
+    <axis
+      xyz="0 0 -1" />
+	<dynamics
+	  friction="0.001" />
+  </joint>
+  <link
+    name="LB2">
+    <inertial>
+      <origin
+        xyz="0.0257671128855008 -0.0487200631973879 -0.00253746920973342"
+        rpy="0 0 0" />
+      <mass
+        value="0.323696605007919" />
+      <inertia
+        ixx="0.00159115114168457"
+        ixy="0.000318435725096246"
+        ixz="3.92379224048623E-05"
+        iyy="0.000174480345787558"
+        iyz="-0.000148055424313775"
+        izz="0.00173219827134064" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cheetah_description/meshes/LB2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cheetah_description/meshes/LB2.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="LB_JOINT2"
+    type="continuous">
+    <origin
+      xyz="0.0239889055485236 0.0138499967714876 0.0359335135116864"
+      rpy="-2.80449724784631 6.30450004185909E-15 0.523598766712586" />
+    <parent
+      link="LB1" />
+    <child
+      link="LB2" />
+    <axis
+      xyz="0.999999999999992 0 0" />
+	<dynamics
+	  friction="0.001" />
+  </joint>
+  <link
+    name="LB3">
+    <inertial>
+      <origin
+        xyz="-0.137259769893214 -0.0677187262851579 0.0012160706821924"
+        rpy="0 0 0" />
+      <mass
+        value="0.114240539936642" />
+      <inertia
+        ixx="9.18073045158711E-02"
+        ixy="-0.0186523391150409"
+        ixz="6.7971742889103E-04"
+        iyy="0.0378962763010066"
+        iyz="3.34553918552012E-04"
+        izz="0.0470767627800977" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cheetah_description/meshes/LB3.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cheetah_description/meshes/LB3.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="LB_JOINT3"
+    type="continuous">
+    <origin
+      xyz="0.0433804661279571 -0.239257600341479 -0.0188626161448396"
+      rpy="-1.57079645284584 1.2337009210514 -1.57079632679494" />
+    <parent
+      link="LB2" />
+    <child
+      link="LB3" />
+    <axis
+      xyz="0 0 1" />
+	<dynamics
+	  friction="0.001" />
+  </joint>
+  <link
+    name="RB1">
+    <inertial>
+      <origin
+        xyz="-0.00356028780538256 -0.00217495210431383 0.0185587184412751"
+        rpy="0 0 0" />
+      <mass
+        value="0.128744524870709" />
+      <inertia
+        ixx="7.54178205091088E-05"
+        ixy="-3.17299798098093E-06"
+        ixz="2.10629200548915E-06"
+        iyy="7.92792585327807E-05"
+        iyz="1.48482224580922E-06"
+        izz="7.43038083164913E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cheetah_description/meshes/RB1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cheetah_description/meshes/RB1.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="RB_JOINT1"
+    type="continuous">
+    <origin
+      xyz="0.0535992246315264 0 0.0725529089199335"
+      rpy="1.57079632679489 0.483622535977452 -3.14159265358979" />
+    <parent
+      link="BODY" />
+    <child
+      link="RB1" />
+    <axis
+      xyz="0 0 -1" />
+	<dynamics
+	  friction="0.001" />
+  </joint>
+  <link
+    name="RB2">
+    <inertial>
+      <origin
+        xyz="-0.0474436393591411 -0.0113664368013873 0.0257671872348984"
+        rpy="0 0 0" />
+      <mass
+        value="0.323696976849496" />
+      <inertia
+        ixx="0.000279146387182187"
+        ixy="-0.000417139040246701"
+        ixz="0.000305970741286676"
+        iyy="0.00162753794502063"
+        iyz="9.65662523830575E-05"
+        izz="0.00159115523706251" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cheetah_description/meshes/RB2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cheetah_description/meshes/RB2.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="RB_JOINT2"
+    type="continuous">
+    <origin
+      xyz="0.0239889051808841 0.0138499974087561 0.0359335135244585"
+      rpy="1.57079632679491 0.692488919582274 2.09439507785289" />
+    <parent
+      link="RB1" />
+    <child
+      link="RB2" />
+    <axis
+      xyz="0 0 0.999999999999996" />
+	<dynamics
+	  friction="0.001" />
+  </joint>
+  <link
+    name="RB3">
+    <inertial>
+      <origin
+        xyz="-0.0744165999732416 -0.133746904962195 0.00126936244095777"
+        rpy="0 0 0" />
+      <mass
+        value="0.114240538818722" />
+      <inertia
+        ixx="0.0359484773911837"
+        ixy="-0.0200011925582525"
+        ixz="5.71738797052665E-04"
+        iyy="0.0111287478468468"
+        iyz="1.02758829617282E-03"
+        izz="0.0470766374381183" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cheetah_description/meshes/RB3.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cheetah_description/meshes/RB3.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="RB_JOINT3"
+    type="continuous">
+    <origin
+      xyz="-0.231823006662634 -0.0621135667231729 0.0433804202483734"
+      rpy="-2.18941904487291E-15 -8.34781210545811E-08 0.692488919581947" />
+    <parent
+      link="RB2" />
+    <child
+      link="RB3" />
+    <axis
+      xyz="0 0 1" />
+	<dynamics
+	  friction="0.001" />
+  </joint>
+</robot>

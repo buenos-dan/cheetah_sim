@@ -1,0 +1,18 @@
+<launch>
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find cheetah_gazebo)/worlds/cheetah.world"/>
+	<arg name="paused" value="true"/>
+  </include>
+
+  <!-- Load the URDF into the ROS Parameter Server -->
+  <param name="robot_description"
+    command="$(find xacro)/xacro --inorder '$(find cheetah_description)/urdf/cheetah.urdf'" />
+
+  <node name="spawn_urdf"
+   pkg="gazebo_ros"
+   type="spawn_model"
+   args="-file $(find cheetah_description)/urdf/cheetah.urdf -urdf -z 0.35 -model cheetah" />
+
+
+</launch>
+
