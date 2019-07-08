@@ -1,2 +1,3 @@
 # cheetah_sim
-quadrupedal robot simulation
+quadrupedal robot simulation  
+use ROS+Gazebo
