@@ -151,9 +151,48 @@
 
 
   <!-- Set link color -->
+  <!--
   <gazebo reference="BODY"> 
-	<material>Gazebo/Orange</material>
+	<material>Gazebo/Red</material>
   </gazebo>
+  <gazebo reference="LF1"> 
+	<material>Gazebo/TurquoiseGlow</material>
+  </gazebo>
+  <gazebo reference="LF2"> 
+	<material>Gazebo/Yellow</material>
+  </gazebo>
+  <gazebo reference="LF3"> 
+	<material>Gazebo/Purple</material>
+  </gazebo>
+  <gazebo reference="LB1"> 
+	<material>Gazebo/TurquoiseGlow</material>
+  </gazebo>
+  <gazebo reference="LB2"> 
+	<material>Gazebo/Yellow</material>
+  </gazebo>
+  <gazebo reference="LB3"> 
+	<material>Gazebo/Purple</material>
+  </gazebo>
+  <gazebo reference="RF1"> 
+	<material>Gazebo/TurquoiseGlow</material>
+  </gazebo>
+  <gazebo reference="RF2"> 
+	<material>Gazebo/Yellow</material>
+  </gazebo>
+  <gazebo reference="RF3"> 
+	<material>Gazebo/Purple</material>
+  </gazebo>
+  <gazebo reference="RB1"> 
+	<material>Gazebo/TurquoiseGlow</material>
+  </gazebo>
+  <gazebo reference="RB2"> 
+	<material>Gazebo/Yellow</material>
+  </gazebo>
+  <gazebo reference="RB3"> 
+	<material>Gazebo/Purple</material>
+  </gazebo>
+  -->
+
 
   <!-- fix body with the world -->
   <!-- link name="world"/ -->
