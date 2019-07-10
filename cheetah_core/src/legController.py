@@ -1,10 +1,17 @@
 #!/usr/bin/evn python
+'''
+    main controller for the cheetah
+'''
+#created on: July 9,2019
+#author    : buenos
+#e-mail    : buenos@buaa.edu.cn
+
+import sys,time
+sys.path.append("./lib")
 import rospy
 from std_msgs.msg import Float64
-import time
 import numpy as np
-
-PI = 3.14159265
+from settings import *
 
 class LegController:
 	def __init__(self,name):
