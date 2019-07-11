@@ -5,6 +5,21 @@
 # cheetah_sim
 quadrupedal robot simulation by ROS and Gazebo  
 
+## Quick start. 
+clone this project to your ros workspace(usually is ~/catkin_ws/src).   
+```
+cd ~/catkin_ws/src
+git clone git@github.com:buenos-dan/cheetah_sim.git
+```
+
+catkin_make this project.   
+```
+cd ~/catkin_ws
+catkin_make
+source ./devel/setup.bash
+```
+
+
 ## Architecture of this project.    
 #### ./ros_package 
 
