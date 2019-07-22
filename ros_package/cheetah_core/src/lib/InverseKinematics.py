@@ -45,7 +45,7 @@ def inverseKinematics(EndPos):
     beta1 = math.atan2(y,z_)
     line1 = math.sqrt(y**2 + z_**2)
     beta2 = math.acos((l2**2+line1**2-l3**2)/(2*l2*line1))
-    alpha2 = beta2 - beta1
+    alpha2 = beta1 - beta2
     alpha3 = PI - math.acos((l2**2+l3**2-line1**2)/(2*l2*l3))
 
     return (alpha1,alpha2,alpha3)

@@ -13,8 +13,7 @@
   <node name="spawn_urdf"
    pkg="gazebo_ros"
    type="spawn_model"
-   args="-file $(find cheetah_description)/urdf/cheetah.urdf -urdf -z 0.35 -model cheetah" />
-
+   args="-file $(find cheetah_description)/urdf/cheetah.urdf -urdf -x 0.9 -y 0.5 -z 0.55 -model cheetah" />
 
 </launch>
 
