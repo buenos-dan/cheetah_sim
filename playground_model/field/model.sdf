@@ -1,0 +1,45 @@
+<?xml version="1.0" ?>
+<sdf version='1.6'>
+  <model name='field'>
+
+    <link name="vennue">
+      <inertial>
+        <pose>0.95537 6.5455 0.14651 0 0 0</pose>
+        <mass>1489.8</mass>
+        <inertia>
+          <ixx>4371.21945073959</ixx>
+          <ixy>419.811818578591</ixy>
+          <ixz>72.2915069651142</ixz>
+          <iyy>1240.12512266806</iyy>
+          <iyz>-120.625135665195</iyz>
+          <izz>5568.05350906298</izz>
+        </inertia>
+      </inertial>
+      <visual name="vennue_visual">
+        <pose>0 0 0 1.5707963267949 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://field/meshes/vennue.STL</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name="vennue_collision">
+        <pose>0 0 0 1.5707963267949 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://field/meshes/vennue.STL</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+                <mu>0.5</mu>
+                <mu2>0.5</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+    </link>
+
+  </model>
+</sdf>
